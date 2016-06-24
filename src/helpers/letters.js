@@ -1,8 +1,12 @@
 const { getState } = require('../store')
 const { getSolution } = require('./words')
 
-const getTriedLetters = (letter) => {
+const getTriedLetters = () => {
   return getState().letters
+}
+
+const getNotTriedLetters = () => {
+  return 'abcdefghijklmnopqrstuvwxyz'.split('').filter(hasLetterNotBeenTried)
 }
 
 const getLettersFromWord = () => {
@@ -11,6 +15,10 @@ const getLettersFromWord = () => {
 
 const hasWordLetter = (letter) => {
   return getLettersFromWord().indexOf(letter) > -1
+}
+
+const hasLetterNotBeenTried = (letter) => {
+  return !hasLetterBeenTried(letter)
 }
 
 const hasLetterBeenTried = (letter) => {
@@ -26,6 +34,7 @@ const getCurrentWordStatus = () => {
 module.exports = {
   getLettersFromWord,
   getTriedLetters,
+  getNotTriedLetters,
   hasWordLetter,
   hasLetterBeenTried,
   getCurrentWordStatus

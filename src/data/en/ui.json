@@ -1,6 +1,7 @@
 {
   "argument.start.description": "Start a new game.",
   "argument.try.description": "Try “letter.”",
+  "argument.try.invalid": "Please pass a single lowercase letter to this command.",
   "argument.letters.description": "Give tried letters.",
 
   "option.lang.description": "Amount of maximum tries.",

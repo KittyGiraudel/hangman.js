@@ -1,6 +1,7 @@
 {
   "argument.start.description": "Démarrer une nouvelle partie.",
   "argument.try.description": "Essayez “lettre”.",
+  "argument.try.invalid": "Cette commande attend une seule lettre minuscule.",
   "argument.letters.description": "Affiche les lettres déjà essayées.",
 
   "option.lang.description": "Nombre d’essais maximum.",
