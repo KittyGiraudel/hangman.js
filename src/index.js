@@ -9,10 +9,22 @@ const { DEFAULT_MAX_TRIES, DEFAULT_LANGUAGE } = require('./configuration')
 const translations = require('./helpers/translations')
 const store = require('./store')
 
+// Helpers…
+
+const s = () => {
+  return store.getState()
+}
+
+const t = (key, parameters) => {
+  const locale = s().words.lang
+  const getTranslation = translations(locale)
+  return getTranslation(key, parameters)
+}
+
 // Is…
 
 const isGameRunning = () => {
-  return store.getState().game.isPlaying === true
+  return s().game.isPlaying === true
 }
 
 const isOver = () => {
@@ -40,7 +52,7 @@ const hasLetterBeenTried = (letter) => {
 // Get…
 
 const getSolution = () => {
-  return store.getState().words.word
+  return s().words.word
 }
 
 const getLettersFromWord = () => {
@@ -48,11 +60,11 @@ const getLettersFromWord = () => {
 }
 
 const getTriedLetters = (letter) => {
-  return store.getState().letters
+  return s().letters
 }
 
 const getTriesLeft = () => {
-  return store.getState().tries.max - store.getState().tries.count
+  return s().tries.max - s().tries.count
 }
 
 const getCurrentWordStatus = () => {
@@ -61,36 +73,18 @@ const getCurrentWordStatus = () => {
     .join(' ')
 }
 
-const t = (key, parameters) => {
-  const locale = store.getState().words.lang
-  const getTranslation = translations(locale)
-  return getTranslation(key, parameters)
-}
-
 // Display…
 
-const displayEmptyLine = function () {
-  this.log('')
-}
-
-const displayMessage = function (message) {
-  this.log(message)
-}
-
-const displayCurrentWordStatus = function () {
-  this.log(getCurrentWordStatus())
-}
-
-const displayCurrentLetter = function (letter, hasBeenTried) {
+const displayCurrentRound = function (letter, hasBeenTried) {
   const message = hasBeenTried
     ? t('tried_letter', { letter })
     : t('try_letter', { letter })
 
-  displayEmptyLine.call(this)
-  displayMessage.call(this, message)
+  this.log('')
+  this.log(message)
 }
 
-const displayEndOfRound = function () {
+const displayGameStatus = function () {
   const word = getSolution()
   const tries = getTriesLeft()
   const message = hasLost()
@@ -99,10 +93,10 @@ const displayEndOfRound = function () {
       ? t('win', { word })
       : t('tries_left', { tries })
 
-  displayCurrentWordStatus.call(this)
-  displayEmptyLine.call(this)
-  displayMessage.call(this, message)
-  displayEmptyLine.call(this)
+  this.log(getCurrentWordStatus())
+  this.log('')
+  this.log(message)
+  this.log('')
 }
 
 // Actions…
@@ -114,14 +108,6 @@ const startGame = function (options) {
   store.dispatch(getWord())
   store.dispatch(resetTries())
   store.dispatch(resetLetters())
-
-  displayEndOfRound.call(this)
-}
-
-const abortGame = function () {
-  store.dispatch(isPlaying(false))
-
-  displayMessage.call(this, t('abort'))
 }
 
 const playRound = function (letter) {
@@ -133,24 +119,23 @@ const playRound = function (letter) {
     store.dispatch(incrementTries())
   }
 
-  displayCurrentLetter.call(this, letter, hasBeenTried)
-  displayEndOfRound.call(this)
+  displayCurrentRound.call(this, letter, hasBeenTried)
+  displayGameStatus.call(this)
 }
 
-const executeStartCommand = function (args, callback) {
-  const { tries, lang } = args.options
+const execStartCmd = function (args, callback) {
+  const tries = args.options.tries || DEFAULT_MAX_TRIES
+  const lang = args.options.lang || DEFAULT_LANGUAGE
 
-  startGame.call(this, {
-    tries: tries || DEFAULT_MAX_TRIES,
-    lang: lang || DEFAULT_LANGUAGE
-  })
-
+  startGame({ tries, lang })
+  displayGameStatus.call(this)
   callback()
 }
 
-const executeTryCommand = function (args, callback) {
+const execTryCmd = function (args, callback) {
   if (!isGameRunning()) {
-    displayMessage.call(this, t('argument_game_not_running'))
+    this.log(t('argument_game_not_running'))
+    this.log('')
     return callback()
   }
 
@@ -163,24 +148,24 @@ const executeTryCommand = function (args, callback) {
   callback()
 }
 
-const executeLettersCommand = function (args, callback) {
+const execLettersCmd = function (args, callback) {
   const letters = getTriedLetters().join(', ')
 
   if (!isGameRunning()) {
-    displayMessage.call(this, t('argument_game_not_running'))
+    this.log(t('argument_game_not_running'))
+    this.log('')
     return callback()
   }
 
-  displayEmptyLine.call(this)
-  displayMessage.call(this, t('tried_letters', { letters }))
-  displayEmptyLine.call(this)
+  this.log('')
+  this.log(t('tried_letters', { letters }))
+  this.log('')
 
   callback()
 }
 
 module.exports = {
-  executeLettersCommand,
-  executeTryCommand,
-  executeStartCommand,
-  abortGame
+  execLettersCmd,
+  execTryCmd,
+  execStartCmd
 }

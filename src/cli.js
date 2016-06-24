@@ -1,33 +1,27 @@
 const vorpal = require('vorpal')()
-const {
-  executeStartCommand,
-  executeTryCommand,
-  executeLettersCommand,
-  abortGame
-} = require('./')
+const t = require('./helpers/translations')('en')
+const { execStartCmd, execTryCmd, execLettersCmd } = require('./')
+const DELIMITER = 'hm:'
 
 // UI…
 
 vorpal
-  .command('start', 'Start a new game.')
-  .option('-t, --tries <tries>', 'Amount of maximum tries.')
-  .option('-l, --lang <lang>', 'Language to be used.')
-  .action(executeStartCommand)
-  .cancel(abortGame.bind(this))
+  .command('start', t('argument.start.description'))
+  .option('-t, --tries <tries>', t('option.lang.description'))
+  .option('-l, --lang <lang>', t('option.tries.description'))
+  .action(execStartCmd)
 
 vorpal
-  .command('try <letter>', 'Try “letter”.')
+  .command('try <letter>', t('argument.try.description'))
   .alias('letter')
-  .action(executeTryCommand)
-  .cancel(abortGame.bind(this))
+  .action(execTryCmd)
 
 vorpal
-  .command('letters', 'Give tried letters.')
-  .action(executeLettersCommand)
-  .cancel(abortGame.bind(this))
+  .command('letters', t('argument.letters.description'))
+  .action(execLettersCmd)
 
 // Run…
 
 vorpal
-  .delimiter('hm:')
+  .delimiter(DELIMITER)
   .show()
