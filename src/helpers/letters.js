@@ -1,16 +1,12 @@
-const { getState } = require('../store')
-const { getSolution } = require('./words')
-
-const getTriedLetters = () => {
-  return getState().letters
-}
+const { getCurrentWord, getTriedLetters } = require('../store/connect')
 
 const getNotTriedLetters = () => {
-  return 'abcdefghijklmnopqrstuvwxyz'.split('').filter(hasLetterNotBeenTried)
+  return 'abcdefghijklmnopqrstuvwxyz'.split('')
+    .filter(hasLetterNotBeenTried)
 }
 
 const getLettersFromWord = () => {
-  return getSolution().split('')
+  return getCurrentWord().split('')
 }
 
 const hasWordLetter = (letter) => {
@@ -33,7 +29,6 @@ const getCurrentWordStatus = () => {
 
 module.exports = {
   getLettersFromWord,
-  getTriedLetters,
   getNotTriedLetters,
   hasWordLetter,
   hasLetterBeenTried,

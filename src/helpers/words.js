@@ -1,16 +1,8 @@
-const { getState } = require('../store')
+const { getLocale } = require('../store/connect')
 const translations = require('./utils/translations')
 
-const getSolution = () => {
-  return getState().words.word
-}
-
 const t = (key, parameters) => {
-  const locale = getState().words.lang
-  return translations(locale)(key, parameters)
+  return translations(getLocale())(key, parameters)
 }
 
-module.exports = {
-  getSolution,
-  t
-}
+module.exports = { t }
