@@ -5,7 +5,7 @@ const { getNotTriedLetters } = require('./helpers/letters')
 const DELIMITER = 'hm:'
 
 const validateTryCmd = function (args) {
-  if (typeof args.letter !== 'string' || args.letter.length != 1) {
+  if (typeof args.letter !== 'string' || args.letter.length !== 1) {
     return t('argument.try.invalid')
   }
 
