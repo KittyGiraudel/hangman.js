@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "node ./src/cli.js",
+    "lint": "standard ./src/**",
+    "test": "mocha --recursive"
+  },
+  "dependencies": {
+    "redux": "^3.5.2",
+    "vorpal": "^1.11.2",
+    "word-list-json": "^0.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3",
+    "standard": "^7.1.2"
+  }
+}
