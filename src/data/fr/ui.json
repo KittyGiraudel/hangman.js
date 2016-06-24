@@ -1,0 +1,19 @@
+{
+  "argument.start.description": "Démarrer une nouvelle partie.",
+  "argument.try.description": "Essayez “lettre”.",
+  "argument.letters.description": "Affiche les lettres déjà essayées.",
+
+  "option.lang.description": "Nombre d’essais maximum.",
+  "option.tries.description": "Langue du jeu.",
+
+  "argument_game_not_running": "Exécutez `start` pour lancer une partie.",
+
+  "win": "Bravo ! Le mot était “{word}”.",
+  "defeat": "Vous avez perdu. Le mot était “{word}”.",
+  "abort": "La partie a été abandonnée.",
+
+  "tries_left": "{tries} essais restants.",
+  "try_letter": "Vous venez d’essayer “{letter}”.",
+  "tried_letter": "La lettre “{letter}” a déjà été essayée.",
+  "tried_letters": "Les lettres suivantes ont été essayées :\n{letters}"
+}
