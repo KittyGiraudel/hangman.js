@@ -1,7 +1,7 @@
 const template = require('./template')
 const LOCALES = {
-  'en': require('../data/en/ui'),
-  'fr': require('../data/fr/ui')
+  'en': require('../../data/en/ui'),
+  'fr': require('../../data/fr/ui')
 }
 
 const t = (lang) => {

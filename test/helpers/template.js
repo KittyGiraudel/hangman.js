@@ -1,5 +1,5 @@
 const assert = require('assert')
-const template = require('../../src/helpers/template')
+const template = require('../../src/helpers/utils/template')
 
 describe('template helper', () => {
   it('should return string as is when no values given', () => {

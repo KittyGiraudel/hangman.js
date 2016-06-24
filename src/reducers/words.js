@@ -1,6 +1,6 @@
 const { DEFAULT_LANGUAGE } = require('../configuration')
-const getDictionary = require('../helpers/getDictionary')
-const arrayRandom = require('../helpers/arrayRandom')
+const getDictionary = require('../helpers/utils/getDictionary')
+const arrayRandom = require('../helpers/utils/arrayRandom')
 
 const getRandomWord = (lang) => {
   return arrayRandom(getDictionary(lang)).toLowerCase()

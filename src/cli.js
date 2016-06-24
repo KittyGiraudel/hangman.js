@@ -1,9 +1,7 @@
 const vorpal = require('vorpal')()
-const t = require('./helpers/translations')('en')
+const t = require('./helpers/utils/translations')('en')
 const { execStartCmd, execTryCmd, execLettersCmd } = require('./')
 const DELIMITER = 'hm:'
-
-// UI…
 
 vorpal
   .command('start', t('argument.start.description'))
@@ -19,8 +17,6 @@ vorpal
 vorpal
   .command('letters', t('argument.letters.description'))
   .action(execLettersCmd)
-
-// Run…
 
 vorpal
   .delimiter(DELIMITER)

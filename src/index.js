@@ -1,106 +1,24 @@
 'use strict'
 
+// Actions
 const { isPlaying } = require('./actions/game')
 const { tryLetter, resetLetters } = require('./actions/letters')
 const { resetTries, incrementTries, setMaxTries } = require('./actions/tries')
 const { getWord, setLanguage } = require('./actions/words')
 
+// Helpers
+const { getTriedLetters, hasWordLetter, hasLetterBeenTried } = require('./helpers/letters')
+const { isOver, isRunning } = require('./helpers/game')
+const { t } = require('./helpers/words')
+const { displayGameStatus, displayCurrentRound } = require('./helpers/display')
+
+// Default configuratioh
 const { DEFAULT_MAX_TRIES, DEFAULT_LANGUAGE } = require('./configuration')
-const translations = require('./helpers/translations')
+
+// Store
 const store = require('./store')
 
-// Helpers…
-
-const s = () => {
-  return store.getState()
-}
-
-const t = (key, parameters) => {
-  const locale = s().words.lang
-  const getTranslation = translations(locale)
-  return getTranslation(key, parameters)
-}
-
-// Is…
-
-const isGameRunning = () => {
-  return s().game.isPlaying === true
-}
-
-const isOver = () => {
-  return hasWon() || hasLost()
-}
-
-// Has…
-
-const hasWon = () => {
-  return getLettersFromWord().every(hasLetterBeenTried)
-}
-
-const hasLost = () => {
-  return getTriesLeft() === 0
-}
-
-const hasWordLetter = (letter) => {
-  return getLettersFromWord().indexOf(letter) > -1
-}
-
-const hasLetterBeenTried = (letter) => {
-  return getTriedLetters().indexOf(letter) > -1
-}
-
-// Get…
-
-const getSolution = () => {
-  return s().words.word
-}
-
-const getLettersFromWord = () => {
-  return getSolution().split('')
-}
-
-const getTriedLetters = (letter) => {
-  return s().letters
-}
-
-const getTriesLeft = () => {
-  return s().tries.max - s().tries.count
-}
-
-const getCurrentWordStatus = () => {
-  return getLettersFromWord()
-    .map((letter) => hasLetterBeenTried(letter) ? letter : '_')
-    .join(' ')
-}
-
-// Display…
-
-const displayCurrentRound = function (letter, hasBeenTried) {
-  const message = hasBeenTried
-    ? t('tried_letter', { letter })
-    : t('try_letter', { letter })
-
-  this.log('')
-  this.log(message)
-}
-
-const displayGameStatus = function () {
-  const word = getSolution()
-  const tries = getTriesLeft()
-  const message = hasLost()
-    ? t('defeat', { word })
-    : hasWon()
-      ? t('win', { word })
-      : t('tries_left', { tries })
-
-  this.log(getCurrentWordStatus())
-  this.log('')
-  this.log(message)
-  this.log('')
-}
-
-// Actions…
-
+// Actions
 const startGame = function (options) {
   store.dispatch(setLanguage(options.lang))
   store.dispatch(setMaxTries(options.tries))
@@ -133,7 +51,7 @@ const execStartCmd = function (args, callback) {
 }
 
 const execTryCmd = function (args, callback) {
-  if (!isGameRunning()) {
+  if (!isRunning()) {
     this.log(t('argument_game_not_running'))
     this.log('')
     return callback()
@@ -151,7 +69,7 @@ const execTryCmd = function (args, callback) {
 const execLettersCmd = function (args, callback) {
   const letters = getTriedLetters().join(', ')
 
-  if (!isGameRunning()) {
+  if (!isRunning()) {
     this.log(t('argument_game_not_running'))
     this.log('')
     return callback()

@@ -1,5 +1,5 @@
 const assert = require('assert')
-const translations = require('../../src/helpers/translations')
+const translations = require('../../src/helpers/utils/translations')
 
 describe('translations helper', () => {
   it('should return a function', () => {

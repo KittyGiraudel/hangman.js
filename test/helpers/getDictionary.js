@@ -1,5 +1,5 @@
 const assert = require('assert')
-const getDictionary = require('../../src/helpers/getDictionary')
+const getDictionary = require('../../src/helpers/utils/getDictionary')
 
 describe('getDictionary helper', () => {
   it('should return the default language dictionary when invalid language given', () => {
