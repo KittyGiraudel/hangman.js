@@ -8,11 +8,11 @@ const initialState = {
 function tries (state = initialState, action) {
   switch (action.type) {
     case 'SET_MAX_TRIES':
-      return Object.assign({}, state, { max: action.value });
+      return Object.assign({}, state, { max: action.value })
     case 'INCREMENT_TRIES':
-      return Object.assign({}, state, { count: (state.count + 1) });
+      return Object.assign({}, state, { count: (state.count + 1) })
     case 'RESET_TRIES':
-      return Object.assign({}, state, { count: initialState.count });
+      return Object.assign({}, state, { count: initialState.count })
   }
 
   return state
