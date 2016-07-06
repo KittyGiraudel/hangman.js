@@ -4,9 +4,9 @@ function letters (state = initialState, action) {
   switch (action.type) {
     case 'TRY_LETTER':
       if (state.indexOf(action.letter) === -1) {
-        return [...state, action.letter];
+        return [...state, action.letter]
       } else {
-        return state;
+        return state
       }
     case 'RESET_LETTERS':
       return initialState
