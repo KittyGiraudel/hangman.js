@@ -5,7 +5,7 @@ const getCurrentWord = () => {
 }
 
 const getTriedLetters = () => {
-  return getState().letters
+  return getState().letters.sort()
 }
 
 const getTries = () => {
