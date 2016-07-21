@@ -1,20 +1,20 @@
 {
   "argument.start.description": "Start a new game.",
   "argument.try.description": "Try “letter.”",
-  "argument.try.invalid": "Please pass a single lowercase letter to this command.",
-  "argument.letters.description": "Give tried letters.",
+  "argument.try.invalid": "Please type a single lowercase letter.",
+  "argument.letters.description": "Display tried letters.",
 
-  "option.lang.description": "Amount of maximum tries.",
+  "option.lang.description": "Maximum amount of tries.",
   "option.tries.description": "Language to be used.",
 
-  "argument_game_not_running": "Run `start` to launch a game.",
+  "argument_game_not_running": "Type `start` to launch a game.",
 
   "win": "Congratulations! The word was ‘{word}.’",
-  "defeat": "You lose. The word was: ‘{word}.’",
+  "defeat": "You lose. The word was ‘{word}.’",
   "abort": "The game was aborted.",
 
   "tries_left": "{tries} tries left.",
-  "try_letter": "You just tried ‘{letter}.’",
+  "try_letter": "You chose ‘{letter}.’",
   "tried_letter": "Letter ‘{letter}’ has already been tried.",
   "tried_letters": "The following letters have been tried:\n{letters}"
 }
