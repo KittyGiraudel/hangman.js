@@ -1,0 +1,20 @@
+{
+  "argument.start.description": "Beginne ein neues Spiel.",
+  "argument.try.description": "Versuch „Buchstabe“.",
+  "argument.try.invalid": "Bitte geben Sie hier einen kleingedruckten Buchstaben ein.",
+  "argument.letters.description": "Bereits versuchte Buchstaben.",
+
+  "option.lang.description": "Anzahl der Versuche.",
+  "option.tries.description": "Sprache.",
+
+  "argument_game_not_running": "Tippen Sie `start` um das Spiel zu beginnen.",
+
+  "win": "Glückwunsch! Das Wort ist: „{word}“.",
+  "defeat": "Sie haben verloren. Das Wort ist: „{word}“.",
+  "abort": "Das Spiel wurde abgebrochen.",
+
+  "tries_left": "{tries} Versuche übrig.",
+  "try_letter": "Sie haben Buchstabe „{letter}“ gewählt.",
+  "tried_letter": "Buchstabe „{letter}“ wurde bereits gewählt.",
+  "tried_letters": "Folgende Buchstaben wurden bereits probiert:\n{letters}"
+}
