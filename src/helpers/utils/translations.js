@@ -1,11 +1,13 @@
 const template = require('./template')
-const LOCALES = {
-  'en': require('../../data/en/ui'),
-  'fr': require('../../data/fr/ui')
-}
 
 const t = (lang) => {
-  const dictionary = LOCALES[lang]
+  var dictionary
+
+  try {
+    dictionary = require('../../data/' + lang + '/ui')
+  } catch (e) {
+    dictionary = require('../../data/en/ui')
+  }
 
   return (key, parameters) => {
     if (dictionary[key]) {

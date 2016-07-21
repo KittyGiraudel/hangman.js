@@ -1,11 +1,12 @@
 const { DEFAULT_LANGUAGE } = require('../../configuration')
-const DICTIONARIES = {
-  'en': require('../../data/en/words'),
-  'fr': require('../../data/fr/words')
-}
 
 const getDictionary = (lang) => {
-  return DICTIONARIES[lang] || DICTIONARIES[DEFAULT_LANGUAGE]
+  try {
+    return require('../../data/' + lang + '/words')
+  } catch (e) {
+    console.log(e)
+    return require('../../data/en/words')
+  }
 }
 
 module.exports = getDictionary
