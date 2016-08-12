@@ -1,6 +1,6 @@
 {
   "argument.start.description": "Start a new game.",
-  "argument.try.description": "Try “letter.”",
+  "argument.try.description": "Try “letter”.",
   "argument.try.invalid": "Please type a single lowercase letter.",
   "argument.letters.description": "Display tried letters.",
 
@@ -9,12 +9,12 @@
 
   "argument_game_not_running": "Type `start` to launch a game.",
 
-  "win": "Congratulations! The word was ‘{word}.’",
-  "defeat": "You lose. The word was ‘{word}.’",
+  "win": "Congratulations! The word was ‘{word}’.",
+  "defeat": "You lose. The word was ‘{word}’.",
   "abort": "The game was aborted.",
 
   "tries_left": "{tries} tries left.",
-  "try_letter": "You chose ‘{letter}.’",
+  "try_letter": "You chose ‘{letter}’.",
   "tried_letter": "Letter ‘{letter}’ has already been tried.",
   "tried_letters": "The following letters have been tried:\n{letters}"
 }
