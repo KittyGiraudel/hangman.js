@@ -1,5 +1,7 @@
 # Hangman.js
 
+![screenshot of hangman.js running](screenshot.png)
+
 ## Install
 
 ```
